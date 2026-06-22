@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #6366f1;
+  --color-accent: #22d3ee;
+  --color-gain: #10b981;
+  --color-loss: #ef4444;
+  --color-surface: #0a0a14;
+  --color-card: #14141f;
+  --color-border: #232336;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body, #root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--color-surface);
+  color: #e2e8f0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(at 15% 5%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+    radial-gradient(at 85% 95%, rgba(34, 211, 238, 0.06) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(10px);
+}
+
+.card-glow:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.15), 0 8px 24px -8px rgba(99, 102, 241, 0.15);
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #1e1e2e; }
+::-webkit-scrollbar-thumb { background: #4a4a6e; border-radius: 3px; }
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-up { animation: fadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+.fade-in { animation: fadeIn 0.5s ease-out backwards; }
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.09) 50%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  background-size: 400px 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+  border-radius: 6px;
+}
