@@ -49,8 +49,8 @@ A real-time portfolio tracking dashboard built with React, powered by Zerodha's 
 ### Installation
 
 ```bash
-git clone https://github.com/yourusername/zerodha_portfolio_dashboard.git
-cd zerodha_portfolio_dashboard
+git clone https://github.com/yourusername/zerodha.git
+cd zerodha
 npm install
 npm run dev
 ```
