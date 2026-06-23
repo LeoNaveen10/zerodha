@@ -49,8 +49,8 @@ export default function StockTable({ sectorFilter, setSectorFilter }) {
         </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm" style={{ minWidth: '820px' }}>
+      <div className="overflow-hidden">
+        <table className="w-full text-sm">
           <thead>
             <tr className="text-[11px] text-slate-500 uppercase tracking-wider border-b border-[var(--color-border)] bg-white/[0.015]">
               <th className="text-left px-5 py-3.5 font-semibold">Stock</th>
