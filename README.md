@@ -17,6 +17,8 @@ A real-time portfolio tracking dashboard built with React, powered by Zerodha's 
 
 ![Summary & Analysis](./screenshots/summary_analysis.png)
 
+![Today's Buy Suggestion](./screenshots/todays-buy.png)
+
 ## ✨ Features
 
 - **Portfolio Summary** — Total value, all-time returns, and daily P&L at a glance
@@ -27,6 +29,7 @@ A real-time portfolio tracking dashboard built with React, powered by Zerodha's 
 - **Live Market Ticker** — Real-time index data (Nifty 50, Sensex, Bank Nifty)
 - **AI-Powered Risk Analysis** — Concentration risk, sector exposure, and win-rate insights
 - **Market Summary** — AI-generated market commentary with key levels
+- **Today's Buy Suggestion** — AI-powered daily buy recommendations based on budget, sector diversification, and analyst consensus (shown as a modal popup)
 
 ## 🖼️ Tech Stack
 
@@ -81,9 +84,11 @@ src/
 │   ├── LiveTicker.jsx         # Market index ticker
 │   ├── MarketSummary.jsx      # AI market commentary
 │   ├── RiskAnalysis.jsx       # AI risk assessment
+│   ├── TodaysBuy.jsx          # AI buy suggestion modal
 │   └── Sparkline.jsx          # Mini sparkline charts
 ├── data/
 │   ├── holdings.js            # Portfolio data (auto-updated via Kite MCP)
+│   ├── todaysBuy.js           # Daily buy suggestions (AI-generated)
 │   └── market.js              # Market/index data
 ├── App.jsx
 ├── main.jsx
@@ -95,9 +100,25 @@ src/
 1. **Authenticate** — Login to Zerodha via Kite OAuth (daily, requires 2FA)
 2. **Fetch** — Kite MCP pulls holdings, MF data, and live quotes
 3. **Update** — Data written to `src/data/holdings.js`
-4. **Render** — React dashboard reads the static data file and renders the UI
+4. **Buy Suggestion** — If market is open, AI asks your budget, analyzes sector allocation, researches analyst ratings, and writes suggestions to `src/data/todaysBuy.js`
+5. **Render** — React dashboard reads the static data files and renders the UI (including a "Today's Buy" modal popup)
 
 The dashboard is fully static after data refresh — no backend server required for hosting.
+
+## 🤖 Agent Steering
+
+This repo includes a `.kiro/steering/` directory with AI agent instructions that automate the portfolio refresh workflow. Any MCP-compatible AI client (Claude Desktop, Cursor, VS Code + Copilot, etc.) with the [Kite MCP Server](https://github.com/zerodha/kite-mcp) configured can follow these instructions.
+
+**What it does**: When you say "refresh my portfolio", the agent follows `.kiro/steering/refresh-portfolio.md` to:
+- Authenticate with Zerodha via Kite MCP
+- Fetch live holdings and write to `src/data/holdings.js`
+- Check if market is open, ask your budget, and generate buy suggestions
+
+**Requirements**: Any MCP-compatible AI client + [Kite MCP Server](https://github.com/zerodha/kite-mcp) configured.
+
+```
+> refresh my portfolio
+```
 
 ## 🛡️ Disclaimer
 

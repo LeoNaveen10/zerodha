@@ -1,18 +1,20 @@
 import { useState, useMemo } from 'react'
 import { stockHoldings, mfHoldings, sectorColors } from './data/holdings'
+import { todaysBuy } from './data/todaysBuy'
 import PortfolioSummary from './components/PortfolioSummary'
 import SectorChart from './components/SectorChart'
 import StockTable from './components/StockTable'
 import MFTable from './components/MFTable'
 import LiveTicker from './components/LiveTicker'
 import TopMovers from './components/TopMovers'
-
+import TodaysBuy from './components/TodaysBuy'
 import MarketSummary from './components/MarketSummary'
 import RiskAnalysis from './components/RiskAnalysis'
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('stocks')
   const [sectorFilter, setSectorFilter] = useState('All')
+  const [showBuy, setShowBuy] = useState(false)
 
   const stats = useMemo(() => {
     const totalInvested = stockHoldings.reduce((s, h) => s + h.avgPrice * h.qty, 0)
@@ -53,9 +55,17 @@ export default function App() {
         {/* Header */}
         <header className="fade-up" style={{ animationDelay: '0ms' }}>
           <div className="relative">
-            <div className="absolute top-0 right-0 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full card">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[11px] text-slate-300 font-medium tracking-wide">Markets Open</span>
+            <div className="absolute top-0 right-0 hidden sm:flex items-center gap-3">
+              {todaysBuy && (
+                <button onClick={() => setShowBuy(true)}
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full card card-glow cursor-pointer text-[11px] font-medium text-emerald-300 tracking-wide hover:border-emerald-500/40 transition-all">
+                  <span>🛒</span> Today's Buy
+                </button>
+              )}
+              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full card">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-[11px] text-slate-300 font-medium tracking-wide">Markets Open</span>
+              </div>
             </div>
             <div className="flex flex-col items-center text-center">
               <div className="flex items-center gap-2.5 mb-2">
@@ -131,6 +141,7 @@ export default function App() {
           <p className="text-[11px] text-slate-600">Made by Naveen Sundararajan</p>
         </footer>
       </div>
+      <TodaysBuy open={showBuy} onClose={() => setShowBuy(false)} />
     </div>
   )
 }
