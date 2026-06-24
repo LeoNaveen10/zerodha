@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { stockHoldings, mfHoldings, sectorColors } from './data/holdings'
 import { todaysBuy } from './data/todaysBuy'
+import { userProfile } from './data/profile'
 import PortfolioSummary from './components/PortfolioSummary'
 import SectorChart from './components/SectorChart'
 import StockTable from './components/StockTable'
@@ -75,8 +76,8 @@ export default function App() {
                   Portfolio <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Dashboard</span>
                 </h1>
               </div>
-              <p className="text-[11px] text-slate-500 tracking-wide">
-                Sundararajan Naveen · TK6149 · {new Date().toLocaleDateString('en-IN', { dateStyle: 'medium' })}
+              <p className="text-[11px] text-slate-500 tracking-wide py-2">
+                {userProfile.userName} · {userProfile.userId} · {new Date().toLocaleDateString('en-IN', { dateStyle: 'medium' })}
               </p>
             </div>
           </div>
@@ -106,7 +107,7 @@ export default function App() {
                     className={`relative -mb-px pb-3 pt-1 text-[15px] font-semibold tracking-wide transition-colors border-b-2 ${isActive
                       ? 'text-white border-indigo-500'
                       : 'text-slate-500 border-transparent hover:text-slate-300'}`}>
-                    {tab === 'stocks' ? 'Stocks' : 'Mutual Funds'}
+                    {tab === 'stocks' ? 'Stocks ' : 'Mutual Funds '}
                     <span className={`ml-2 text-[12px] tabular-nums ${isActive ? 'text-slate-400' : 'text-slate-600'}`}>{count}</span>
                   </button>
                 )

@@ -7,13 +7,13 @@ export default function TopMovers() {
 
   return (
     <div className="card rounded-2xl px-7 py-7">
-      <h3 className="text-sm font-semibold text-slate-200 mb-7 flex items-center gap-2">
+      <h3 className="text-sm font-semibold text-slate-200 mb-7 flex items-center gap-2 py-1.5">
         <span className="w-1 h-4 rounded-full bg-gradient-to-b from-emerald-400 to-red-400" />
         Today's Movers
       </h3>
 
       <div className="mb-7">
-        <p className="text-[10px] text-emerald-400/90 font-bold uppercase tracking-[0.15em] mb-4 flex items-center gap-1.5">
+        <p className="text-[10px] text-emerald-400/90 font-bold uppercase tracking-[0.15em] mb-4 flex items-center gap-1.5 py-1.5">
           <span>↑</span> Top Gainers
         </p>
         <div className="grid grid-cols-2 gap-3">
@@ -36,7 +36,7 @@ export default function TopMovers() {
       <div className="border-t border-[var(--color-border)] my-8" />
 
       <div>
-        <p className="text-[10px] text-red-400/90 font-bold uppercase tracking-[0.15em] mb-4 flex items-center gap-1.5">
+        <p className="text-[10px] text-red-400/90 font-bold uppercase tracking-[0.15em] mb-4 flex items-center gap-1.5 py-2">
           <span>↓</span> Top Losers
         </p>
         <div className="grid grid-cols-2 gap-3">

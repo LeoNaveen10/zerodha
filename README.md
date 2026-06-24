@@ -21,6 +21,8 @@ A real-time portfolio tracking dashboard built with React, powered by Zerodha's 
 
 ![Sell Alerts](./screenshots/sell-alerts.png)
 
+![Today's Movers](./screenshots/todays-movers.png)
+
 ## ✨ Features
 
 - **Portfolio Summary** — Total value, all-time returns, and daily P&L at a glance
@@ -67,11 +69,12 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 Use any MCP-compatible client with the Kite MCP server to refresh data:
 
 1. Authenticate with Zerodha via Kite OAuth
-2. Call `get_holdings` and `get_mf_holdings` tools
-3. Fetch live quotes via `get_quotes`
-4. Write the updated data to `src/data/holdings.js`
+2. Call `get_profile` to fetch user info → writes to `src/data/profile.js`
+3. Call `get_holdings` and `get_mf_holdings` tools
+4. Fetch live quotes via `get_quotes`
+5. Write the updated data to `src/data/holdings.js`
 
-The dashboard reads from this static data file — just refresh the browser after updating.
+The dashboard reads from these static data files — just refresh the browser after updating.
 
 ## 📁 Project Structure
 
@@ -90,7 +93,9 @@ src/
 │   └── Sparkline.jsx          # Mini sparkline charts
 ├── data/
 │   ├── holdings.js            # Portfolio data (auto-updated via Kite MCP)
+│   ├── profile.js             # User profile (auto-updated via Kite MCP)
 │   ├── todaysBuy.js           # Daily buy suggestions (AI-generated)
+│   ├── sellAlerts.js          # Sell alerts (AI-generated)
 │   └── market.js              # Market/index data
 ├── App.jsx
 ├── main.jsx
@@ -100,8 +105,8 @@ src/
 ## 🔄 How It Works
 
 1. **Authenticate** — Login to Zerodha via Kite OAuth (daily, requires 2FA)
-2. **Fetch** — Kite MCP pulls holdings, MF data, and live quotes
-3. **Update** — Data written to `src/data/holdings.js`
+2. **Fetch** — Kite MCP pulls user profile, holdings, MF data, and live quotes
+3. **Update** — Data written to `src/data/profile.js` and `src/data/holdings.js`
 4. **Buy Suggestion** — If market is open, AI asks your budget, analyzes sector allocation, researches analyst ratings, and writes suggestions to `src/data/todaysBuy.js`
 5. **Render** — React dashboard reads the static data files and renders the UI (including a "Today's Buy" modal popup)
 
