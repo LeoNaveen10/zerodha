@@ -10,6 +10,7 @@ import TopMovers from './components/TopMovers'
 import TodaysBuy from './components/TodaysBuy'
 import MarketSummary from './components/MarketSummary'
 import RiskAnalysis from './components/RiskAnalysis'
+import SellAlerts from './components/SellAlerts'
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('stocks')
@@ -130,6 +131,12 @@ export default function App() {
         <div style={{ height: '64px' }} />
 
         {/* Analysis Section */}
+        <div className="fade-up" style={{ animationDelay: '420ms' }}>
+          <SellAlerts />
+        </div>
+
+        <div style={{ height: '40px' }} />
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 fade-up" style={{ animationDelay: '450ms' }}>
           <MarketSummary />
           <RiskAnalysis />

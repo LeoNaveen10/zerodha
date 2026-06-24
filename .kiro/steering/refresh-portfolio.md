@@ -17,7 +17,7 @@
 12. If market is OPEN: ask the user "How much are you willing to invest today?" and wait for their response (₹ amount)
 13. Analyze sector allocation from the freshly updated holdings — identify underweight sectors
 14. Identify stocks already held trading at attractive levels (below avg price or near support)
-15. Do web search for underweight-sector stocks to find analyst ratings, target prices, and any disqualifying negative news
+15. **MANDATORY**: Do web search for each stock being considered — find analyst ratings, target prices, recent news, and any disqualifying negative news. Never suggest a stock without web-searching it first.
 16. Prioritize: underweight sector > already held (averaging down) > bullish analyst consensus > attractive price
 17. Write suggestions to `src/data/todaysBuy.js` in this format:
 
@@ -50,3 +50,31 @@ export const todaysBuy = {
 - Must afford at least 1 share within budget
 
 18. Run the React app with `npm run dev` and return the localhost URL to the user
+
+## Sell Alerts
+
+19. For each stock in the updated holdings, check if:
+    - Current price has hit or exceeded analyst target price (profit booking opportunity)
+    - Stock is down more than 15% from average cost (potential cut-loss)
+    - Any recent negative news (governance issues, downgrades, earnings miss)
+20. **MANDATORY**: Do web search for any stock that triggers the above — confirm with recent analyst opinion. Never flag a stock without web-searching it first.
+21. Write alerts to `src/data/sellAlerts.js` in this format (or set `sellAlerts = null` if none):
+
+```js
+// Generated on {ISO timestamp}
+export const sellAlerts = {
+  date: "{YYYY-MM-DD}",
+  alerts: [
+    {
+      symbol: "SYMBOL",
+      sector: "Sector",
+      severity: "high", // "high" or "medium"
+      reason: "Brief explanation why this stock needs attention",
+    },
+  ],
+};
+```
+
+- severity "high" = strong sell signal (target hit, major bad news)
+- severity "medium" = watch closely (approaching target, minor concerns)
+- Max 5 alerts, only flag genuinely concerning positions

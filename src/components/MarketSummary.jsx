@@ -36,7 +36,7 @@ export default function MarketSummary() {
         Daily Summary
       </h3>
 
-      <div className="space-y-4 text-[13px] text-slate-300 leading-relaxed">
+      <div className="space-y-6 text-[13px] text-slate-300 leading-relaxed">
         <p>
           Your portfolio is {todayUp ? (
             <span className="text-emerald-400 font-semibold">up {fmt(todayPnl)}</span>
@@ -66,12 +66,12 @@ export default function MarketSummary() {
         </p>
 
         {todayUp ? (
-          <p className="text-slate-400 text-[12px] italic mt-2">
-            A positive session overall. Gains are broad-based with most sectors contributing.
+          <p className="text-slate-400 text-[12px] italic">
+            A positive session for long-term compounding. Daily moves are noise — stay focused on your multi-year thesis.
           </p>
         ) : (
-          <p className="text-slate-400 text-[12px] italic mt-2">
-            A mixed session. Consider reviewing positions in underperforming sectors if the trend persists.
+          <p className="text-slate-400 text-[12px] italic">
+            A red day is part of the journey. Short-term dips often create long-term buying opportunities — stay patient with your thesis.
           </p>
         )}
       </div>

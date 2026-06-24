@@ -19,6 +19,8 @@ A real-time portfolio tracking dashboard built with React, powered by Zerodha's 
 
 ![Today's Buy Suggestion](./screenshots/todays-buy.png)
 
+![Sell Alerts](./screenshots/sell-alerts.png)
+
 ## ✨ Features
 
 - **Portfolio Summary** — Total value, all-time returns, and daily P&L at a glance

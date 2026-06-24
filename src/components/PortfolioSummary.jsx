@@ -69,12 +69,12 @@ export default function PortfolioSummary({ stats }) {
         {metrics.map(m => (
           <div key={m.label}
             className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)]/40 p-5 flex flex-col items-center justify-center text-center min-h-[140px]">
-            <p className="text-[11px] text-slate-500 uppercase tracking-[0.12em] font-semibold mb-3">{m.label}</p>
-            <p className={`text-[24px] font-bold tracking-tight leading-none tabular-nums ${toneText[m.tone]}`}>
+            <p className="text-[11px] text-slate-500 uppercase tracking-[0.12em] font-semibold mb-3 py-2">{m.label}</p>
+            <p className={`text-[24px] font-bold tracking-tight leading-none tabular-nums py-2 ${toneText[m.tone]}`}>
               {m.value < 0 ? '-' : ''}₹{fmt(m.value)}
             </p>
             {m.pct !== undefined && (
-              <div className={`inline-flex items-center gap-1 mt-3 px-2.5 py-0.5 rounded-md text-[10.5px] font-semibold ${toneChip[m.tone]}`}>
+              <div className={`inline-flex items-center gap-1.5 mt-4 px-3 py-1.5 rounded-md text-[11px] font-semibold ${toneChip[m.tone]}`}>
                 <span>{m.pct >= 0 ? '↑' : '↓'}</span>
                 {Math.abs(m.pct).toFixed(2)}%
               </div>

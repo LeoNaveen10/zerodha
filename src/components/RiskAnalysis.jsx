@@ -51,7 +51,7 @@ export default function RiskAnalysis() {
         Risk Analysis
       </h3>
 
-      <div className="space-y-4 text-[13px] text-slate-300 leading-relaxed">
+      <div className="space-y-6 text-[13px] text-slate-300 leading-relaxed">
         <p>
           Your portfolio risk level is assessed as{' '}
           <span className={`font-bold ${riskColor}`}>{riskLabel}</span>.
@@ -73,8 +73,9 @@ export default function RiskAnalysis() {
 
         {itAllRed && (
           <p>
-            Notably, <span className="text-red-400 font-medium">all {itStocks.length} IT stocks are in loss</span> — this sector has
-            been a consistent drag. Consider whether this is a conviction hold or if the thesis has changed.
+            Notably, <span className="text-red-400 font-medium">all {itStocks.length} IT stocks are in loss</span> — however,
+            IT remains a long-term secular growth story. If your conviction in the sector thesis is intact,
+            these drawdowns may present averaging opportunities over time.
           </p>
         )}
 
@@ -85,9 +86,9 @@ export default function RiskAnalysis() {
           <span className="text-red-400 font-medium">-{fmt(Math.abs(totalLoss))}</span>.
         </p>
 
-        <p className="text-slate-400 text-[12px] italic mt-2">
-          Consider rebalancing towards equal-weight allocation and setting stop-losses on positions
-          with more than 20% drawdown to contain further downside.
+        <p className="text-slate-400 text-[12px] italic">
+          Think in years, not days. Temporary drawdowns are normal for wealth-building portfolios.
+          Focus on business fundamentals and rebalance gradually — avoid panic selling on short-term noise.
         </p>
       </div>
     </div>

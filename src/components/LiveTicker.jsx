@@ -79,7 +79,7 @@ export default function LiveTicker() {
     const change = Number(item.change || 0)
     const val = typeof item.value === 'number' ? item.value.toLocaleString('en-IN') : item.value
     return (
-      <div key={item.name} className="flex items-center justify-between py-2 px-2.5 rounded-lg hover:bg-white/[0.025] transition-colors">
+      <div key={item.name} className="flex items-center justify-between py-2.5 px-2.5 rounded-lg hover:bg-white/[0.025] transition-colors">
         <div className="flex items-center gap-2">
           <span className="text-xs">{item.icon}</span>
           <span className="text-[12px] text-slate-300 font-medium">{item.name}</span>
@@ -126,7 +126,7 @@ export default function LiveTicker() {
   return (
     <div className="card rounded-2xl px-6 py-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm font-semibold text-slate-200 flex items-center gap-2">
+        <h3 className="text-sm font-semibold text-slate-200 flex items-center gap-2 py-1.5">
           <span className="w-1 h-4 rounded-full bg-gradient-to-b from-indigo-400 to-cyan-400" />
           Market Overview
         </h3>

@@ -49,16 +49,16 @@ export default function StockTable({ sectorFilter, setSectorFilter }) {
         </div>
       </div>
 
-      <div className="overflow-hidden">
+      <div>
         <table className="w-full text-sm">
           <thead>
             <tr className="text-[11px] text-slate-500 uppercase tracking-wider border-b border-[var(--color-border)] bg-white/[0.015]">
-              <th className="text-left px-5 py-3.5 font-semibold">Stock</th>
-              <SortTh label="Qty" col="qty" sortBy={sortBy} sortDir={sortDir} onClick={handleSort} />
-              <SortTh label="Avg" col="avgPrice" sortBy={sortBy} sortDir={sortDir} onClick={handleSort} />
-              <SortTh label="Invested" col="invested" sortBy={sortBy} sortDir={sortDir} onClick={handleSort} />
+              <th className="text-left px-3 py-3.5 font-semibold">Stock</th>
+              <SortTh label="Qty" col="qty" sortBy={sortBy} sortDir={sortDir} onClick={handleSort} className="hidden xl:table-cell" />
+              <SortTh label="Avg" col="avgPrice" sortBy={sortBy} sortDir={sortDir} onClick={handleSort} className="hidden lg:table-cell" />
+              <SortTh label="Invested" col="invested" sortBy={sortBy} sortDir={sortDir} onClick={handleSort} className="hidden xl:table-cell" />
               <SortTh label="LTP" col="ltp" sortBy={sortBy} sortDir={sortDir} onClick={handleSort} />
-              <SortTh label="Current" col="current" sortBy={sortBy} sortDir={sortDir} onClick={handleSort} />
+              <SortTh label="Current" col="current" sortBy={sortBy} sortDir={sortDir} onClick={handleSort} className="hidden lg:table-cell" />
               <SortTh label="P&L" col="pnl" sortBy={sortBy} sortDir={sortDir} onClick={handleSort} />
               <SortTh label="Return" col="return" sortBy={sortBy} sortDir={sortDir} onClick={handleSort} />
               <SortTh label="Day" col="dayChange" sortBy={sortBy} sortDir={sortDir} onClick={handleSort} last />
@@ -71,29 +71,29 @@ export default function StockTable({ sectorFilter, setSectorFilter }) {
               const returnPct = (h.pnl / invested) * 100
               return (
                 <tr key={h.symbol} className={`border-b border-[var(--color-border)]/30 hover:bg-white/[0.02] transition-colors ${i === sorted.length - 1 ? 'border-b-0' : ''}`}>
-                  <td className="px-5 py-3.5">
-                    <div className="flex items-center gap-2.5">
-                      <span className="w-1 h-8 rounded-full shrink-0" style={{ background: sectorColors[h.sector] }} />
+                  <td className="px-3 py-3">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1 h-7 rounded-full shrink-0" style={{ background: sectorColors[h.sector] }} />
                       <div>
                         <p className="font-semibold text-white text-[13px]">{h.symbol}</p>
                         <p className="text-[9px] text-slate-500 mt-0.5 uppercase tracking-wider">{h.sector} · {h.exchange}</p>
                       </div>
                     </div>
                   </td>
-                  <td className="px-2.5 py-3.5 text-right text-slate-300 font-medium text-[13px]">{h.qty}</td>
-                  <td className="px-2.5 py-3.5 text-right text-slate-400 text-[13px]">₹{h.avgPrice.toFixed(0)}</td>
-                  <td className="px-2.5 py-3.5 text-right text-slate-400 text-[13px]">₹{(invested / 1000).toFixed(1)}K</td>
-                  <td className="px-2.5 py-3.5 text-right text-white font-semibold text-[13px]">₹{h.ltp.toFixed(0)}</td>
-                  <td className="px-2.5 py-3.5 text-right text-white font-medium text-[13px]">₹{(current / 1000).toFixed(1)}K</td>
-                  <td className={`px-2.5 py-3.5 text-right font-semibold text-[13px] ${h.pnl >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                  <td className="hidden xl:table-cell px-1.5 py-3 text-right text-slate-300 font-medium text-[13px]">{h.qty}</td>
+                  <td className="hidden lg:table-cell px-1.5 py-3 text-right text-slate-400 text-[13px]">₹{h.avgPrice.toFixed(0)}</td>
+                  <td className="hidden xl:table-cell px-1.5 py-3 text-right text-slate-400 text-[13px]">₹{(invested / 1000).toFixed(1)}K</td>
+                  <td className="px-1.5 py-3 text-right text-white font-semibold text-[13px]">₹{h.ltp.toFixed(0)}</td>
+                  <td className="hidden lg:table-cell px-1.5 py-3 text-right text-white font-medium text-[13px]">₹{(current / 1000).toFixed(1)}K</td>
+                  <td className={`px-1.5 py-3 text-right font-semibold text-[13px] ${h.pnl >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {h.pnl >= 0 ? '+' : ''}₹{Math.abs(h.pnl).toLocaleString('en-IN', { maximumFractionDigits: 0 })}
                   </td>
-                  <td className="px-2.5 py-3.5 text-right">
-                    <span className={`inline-block px-2 py-0.5 rounded-md text-[11px] font-semibold ${returnPct >= 0 ? 'bg-emerald-500/10 text-emerald-300' : 'bg-red-500/10 text-red-300'}`}>
+                  <td className="px-1.5 py-3 text-right">
+                    <span className={`inline-block px-1.5 py-0.5 rounded-md text-[11px] font-semibold ${returnPct >= 0 ? 'bg-emerald-500/10 text-emerald-300' : 'bg-red-500/10 text-red-300'}`}>
                       {returnPct >= 0 ? '+' : ''}{returnPct.toFixed(1)}%
                     </span>
                   </td>
-                  <td className={`pr-10 pl-2.5 py-3.5 text-right font-medium text-[12px] whitespace-nowrap ${h.dayChange >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                  <td className={`pr-3 pl-1.5 py-3 text-right font-medium text-[12px] whitespace-nowrap ${h.dayChange >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {h.dayChange >= 0 ? '▲' : '▼'}{Math.abs(h.dayChange).toFixed(2)}%
                   </td>
                 </tr>
@@ -106,12 +106,12 @@ export default function StockTable({ sectorFilter, setSectorFilter }) {
   )
 }
 
-function SortTh({ label, col, sortBy, sortDir, onClick, last }) {
+function SortTh({ label, col, sortBy, sortDir, onClick, last, className = '' }) {
   const active = sortBy === col
-  const pad = last ? 'pr-10 pl-2.5' : 'px-2.5'
+  const pad = last ? 'pr-3 pl-1.5' : 'px-1.5'
   return (
     <th
-      className={`text-right ${pad} py-3.5 font-semibold cursor-pointer select-none transition-colors group whitespace-nowrap ${active ? 'text-indigo-300' : 'hover:text-slate-300'}`}
+      className={`text-right ${pad} py-3.5 font-semibold cursor-pointer select-none transition-colors group whitespace-nowrap ${active ? 'text-indigo-300' : 'hover:text-slate-300'} ${className}`}
       onClick={() => onClick(col)}
     >
       <span className="inline-flex items-center gap-1 justify-end">
