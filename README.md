@@ -1,6 +1,6 @@
-# 📊 Zerodha Portfolio Dashboard
+# 📊 AI Portfolio Dashboard
 
-A real-time portfolio tracking dashboard built with React, powered by Zerodha's Kite API via MCP (Model Context Protocol). Fetches live stock and mutual fund holdings data and presents it through an elegant, dark-themed UI.
+A real-time portfolio tracking dashboard built with React, powered by broker APIs via MCP (Model Context Protocol). Fetches live stock and mutual fund holdings data and presents it through an elegant, AI-driven dark-themed UI. Currently integrated with Zerodha Kite, but designed to work with any broker that has an MCP server.
 
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vite.dev)
@@ -44,7 +44,7 @@ A real-time portfolio tracking dashboard built with React, powered by Zerodha's 
 | Frontend | React 19, Vite 8 |
 | Styling | Tailwind CSS 4 |
 | Charts | Recharts |
-| Data Source | Zerodha Kite API (via MCP) |
+| Data Source | Broker API via MCP (Zerodha Kite, etc.) |
 
 ## 🚀 Getting Started
 
@@ -52,14 +52,14 @@ A real-time portfolio tracking dashboard built with React, powered by Zerodha's 
 
 - Node.js 18+
 - Any MCP-compatible AI client (Claude Desktop, Cursor, VS Code + Copilot, etc.)
-- [Kite MCP Server](https://github.com/zerodha/kite-mcp) configured in your client
-- Zerodha Kite account
+- [Kite MCP Server](https://github.com/zerodha/kite-mcp) configured in your client (or any broker MCP server)
+- Broker account (Zerodha, Groww, Angel One, etc.)
 
 ### Installation
 
 ```bash
-git clone https://github.com/yourusername/zerodha.git
-cd zerodha
+git clone https://github.com/LeoNaveen10/ai-portfolio-dashboard.git
+cd ai-portfolio-dashboard
 npm install
 npm run dev
 ```
@@ -68,9 +68,9 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ### Refreshing Portfolio Data
 
-Use any MCP-compatible client with the Kite MCP server to refresh data:
+Use any MCP-compatible client with your broker's MCP server to refresh data:
 
-1. Authenticate with Zerodha via Kite OAuth
+1. Authenticate with your broker via OAuth
 2. Call `get_profile` to fetch user info → writes to `src/data/profile.js`
 3. Call `get_holdings` and `get_mf_holdings` tools
 4. Fetch live quotes via `get_quotes`
@@ -110,8 +110,8 @@ src/
 
 ## 🔄 How It Works
 
-1. **Authenticate** — Login to Zerodha via Kite OAuth (daily, requires 2FA)
-2. **Fetch** — Kite MCP pulls user profile, holdings, MF data, and live quotes
+1. **Authenticate** — Login to your broker via OAuth (daily, may require 2FA)
+2. **Fetch** — Broker MCP pulls user profile, holdings, MF data, and live quotes
 3. **Update** — Data written to `src/data/profile.js` and `src/data/holdings.js`
 4. **Buy Suggestion** — If market is open, AI asks your budget, analyzes sector allocation, researches analyst ratings, and writes suggestions to `src/data/todaysBuy.js`
 5. **Render** — React dashboard reads the static data files and renders the UI (including a "Today's Buy" modal popup)
@@ -120,10 +120,10 @@ The dashboard is fully static after data refresh — no backend server required 
 
 ## 🤖 Agent Steering
 
-This repo includes a `.kiro/steering/` directory with AI agent instructions that automate the portfolio refresh workflow. Any MCP-compatible AI client (Claude Desktop, Cursor, VS Code + Copilot, etc.) with the [Kite MCP Server](https://github.com/zerodha/kite-mcp) configured can follow these instructions.
+This repo includes a `.kiro/steering/` directory with AI agent instructions that automate the portfolio refresh workflow. Any MCP-compatible AI client (Claude Desktop, Cursor, VS Code + Copilot, etc.) with a broker MCP server (e.g., [Kite MCP Server](https://github.com/zerodha/kite-mcp)) configured can follow these instructions.
 
 **What it does**: When you say "refresh my portfolio", the agent follows `.kiro/steering/refresh-portfolio.md` to:
-- Authenticate with Zerodha via Kite MCP
+- Authenticate with your broker via MCP
 - Fetch live holdings and write to `src/data/holdings.js`
 - Check if market is open, ask your budget, and generate buy suggestions
 - Generate sell alerts for positions needing attention
