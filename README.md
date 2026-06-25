@@ -34,6 +34,8 @@ A real-time portfolio tracking dashboard built with React, powered by Zerodha's 
 - **AI-Powered Risk Analysis** — Concentration risk, sector exposure, and win-rate insights
 - **Market Summary** — AI-generated market commentary with key levels
 - **Today's Buy Suggestion** — AI-powered daily buy recommendations based on budget, sector diversification, and analyst consensus (shown as a modal popup)
+- **Stock Ideas** — AI-researched short-term (1-3 month) and long-term (1+ year) stock ideas outside your current portfolio, with analyst targets and conviction levels
+- **Portfolio Health Score** — AI-computed 0-100 health score with breakdown across diversification, sector concentration, analyst alignment, and risk factors
 
 ## 🖼️ Tech Stack
 
@@ -90,12 +92,16 @@ src/
 │   ├── MarketSummary.jsx      # AI market commentary
 │   ├── RiskAnalysis.jsx       # AI risk assessment
 │   ├── TodaysBuy.jsx          # AI buy suggestion modal
+│   ├── StockIdeas.jsx         # AI stock ideas (short & long term)
+│   ├── PortfolioHealth.jsx    # AI portfolio health score
 │   └── Sparkline.jsx          # Mini sparkline charts
 ├── data/
 │   ├── holdings.js            # Portfolio data (auto-updated via Kite MCP)
 │   ├── profile.js             # User profile (auto-updated via Kite MCP)
 │   ├── todaysBuy.js           # Daily buy suggestions (AI-generated)
 │   ├── sellAlerts.js          # Sell alerts (AI-generated)
+│   ├── stockIdeas.js          # Stock ideas outside portfolio (AI-generated)
+│   ├── portfolioHealth.js     # Portfolio health score (AI-generated)
 │   └── market.js              # Market/index data
 ├── App.jsx
 ├── main.jsx
@@ -120,6 +126,9 @@ This repo includes a `.kiro/steering/` directory with AI agent instructions that
 - Authenticate with Zerodha via Kite MCP
 - Fetch live holdings and write to `src/data/holdings.js`
 - Check if market is open, ask your budget, and generate buy suggestions
+- Generate sell alerts for positions needing attention
+- Research stock ideas (short-term and long-term) outside your current portfolio
+- Compute a Portfolio Health Score based on diversification, sector balance, and risk
 
 **Requirements**: Any MCP-compatible AI client + [Kite MCP Server](https://github.com/zerodha/kite-mcp) configured.
 

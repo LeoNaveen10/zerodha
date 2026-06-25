@@ -1,6 +1,7 @@
-import { useState, useMemo } from 'react'
+﻿import { useState, useMemo } from 'react'
 import { stockHoldings, mfHoldings, sectorColors } from './data/holdings'
 import { todaysBuy } from './data/todaysBuy'
+import { stockIdeas } from './data/stockIdeas'
 import { userProfile } from './data/profile'
 import PortfolioSummary from './components/PortfolioSummary'
 import SectorChart from './components/SectorChart'
@@ -9,14 +10,17 @@ import MFTable from './components/MFTable'
 import LiveTicker from './components/LiveTicker'
 import TopMovers from './components/TopMovers'
 import TodaysBuy from './components/TodaysBuy'
+import StockIdeas from './components/StockIdeas'
 import MarketSummary from './components/MarketSummary'
 import RiskAnalysis from './components/RiskAnalysis'
 import SellAlerts from './components/SellAlerts'
+import PortfolioHealth from './components/PortfolioHealth'
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('stocks')
   const [sectorFilter, setSectorFilter] = useState('All')
   const [showBuy, setShowBuy] = useState(false)
+  const [showIdeas, setShowIdeas] = useState(false)
 
   const stats = useMemo(() => {
     const totalInvested = stockHoldings.reduce((s, h) => s + h.avgPrice * h.qty, 0)
@@ -64,6 +68,12 @@ export default function App() {
                   <span>🛒</span> Today's Buy
                 </button>
               )}
+              {stockIdeas && (
+                <button onClick={() => setShowIdeas(true)}
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full card card-glow cursor-pointer text-[11px] font-medium text-amber-300 tracking-wide hover:border-amber-500/40 transition-all">
+                  <span>💡</span> Stock Ideas
+                </button>
+              )}
               <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full card">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-[11px] text-slate-300 font-medium tracking-wide">Markets Open</span>
@@ -71,19 +81,19 @@ export default function App() {
             </div>
             <div className="flex flex-col items-center text-center">
               <div className="flex items-center gap-2.5 mb-2">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center font-bold text-white text-sm shadow-lg shadow-indigo-500/30">₹</div>
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center font-bold text-white text-sm shadow-lg shadow-indigo-500/30">â‚¹</div>
                 <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                   Portfolio <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Dashboard</span>
                 </h1>
               </div>
               <p className="text-[11px] text-slate-500 tracking-wide py-2">
-                {userProfile.userName} · {userProfile.userId} · {new Date().toLocaleDateString('en-IN', { dateStyle: 'medium' })}
+                {userProfile.userName} Â· {userProfile.userId} Â· {new Date().toLocaleDateString('en-IN', { dateStyle: 'medium' })}
               </p>
             </div>
           </div>
         </header>
 
-        {/* Spacer: header → tiles */}
+        {/* Spacer: header â†’ tiles */}
         <div style={{ height: '48px' }} />
 
         {/* Summary Cards */}
@@ -91,7 +101,7 @@ export default function App() {
           <PortfolioSummary stats={stats} />
         </section>
 
-        {/* Spacer: tiles → main content */}
+        {/* Spacer: tiles â†’ main content */}
         <div style={{ height: '56px' }} />
 
         {/* Main Content */}
@@ -118,7 +128,7 @@ export default function App() {
               : <MFTable />}
           </div>
 
-          {/* Right Sidebar — each section has explicit spacing */}
+          {/* Right Sidebar â€” each section has explicit spacing */}
           <div className="lg:col-span-5 fade-up" style={{ animationDelay: '220ms' }}>
             <div><LiveTicker /></div>
             <div style={{ height: '48px' }} />
@@ -138,6 +148,12 @@ export default function App() {
 
         <div style={{ height: '40px' }} />
 
+        <div className="fade-up" style={{ animationDelay: '435ms' }}>
+          <PortfolioHealth />
+        </div>
+
+        <div style={{ height: '40px' }} />
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 fade-up" style={{ animationDelay: '450ms' }}>
           <MarketSummary />
           <RiskAnalysis />
@@ -145,11 +161,14 @@ export default function App() {
 
         <div style={{ height: '64px' }} />
         <footer className="pt-8 border-t border-[var(--color-border)] text-center fade-in" style={{ animationDelay: '550ms' }}>
-          <p className="text-[11px] text-slate-600">Powered by Kite MCP • Live data from Yahoo Finance & ExchangeRate API</p>
+          <p className="text-[11px] text-slate-600">Powered by Kite MCP â€¢ Live data from Yahoo Finance & ExchangeRate API</p>
           <p className="text-[11px] text-slate-600">Made by Naveen Sundararajan</p>
         </footer>
       </div>
       <TodaysBuy open={showBuy} onClose={() => setShowBuy(false)} />
+      <StockIdeas open={showIdeas} onClose={() => setShowIdeas(false)} />
     </div>
   )
 }
+
+

@@ -88,3 +88,76 @@ export const sellAlerts = {
 - severity "high" = strong sell signal (target hit, major bad news)
 - severity "medium" = watch closely (approaching target, minor concerns)
 - Max 5 alerts, only flag genuinely concerning positions
+
+## Stock Ideas (outside portfolio)
+
+23. Research 2-3 short-term stock ideas (1-3 month horizon) — look for momentum plays, technical breakouts, upcoming catalysts, sector rotation opportunities
+24. Research 2-3 long-term stock ideas (1+ year horizon) — look for undervalued quality names, strong fundamentals, sector tailwinds, beaten-down blue chips
+25. **MANDATORY**: Candidates must NOT be in the user's current portfolio. Web search each candidate for analyst consensus, recent news, and red flags. Never suggest without verification.
+26. Write suggestions to `src/data/stockIdeas.js` in this format (or set `stockIdeas = null` if unable to find quality ideas):
+
+```js
+// Generated on {ISO timestamp}
+export const stockIdeas = {
+  date: "{YYYY-MM-DD}",
+  shortTerm: [
+    {
+      symbol: "SYMBOL",
+      exchange: "NSE/BSE",
+      sector: "Sector",
+      ltp: 123.45,
+      analystTarget: 150.00,
+      upside: "21.5%",
+      conviction: "high", // "high" or "medium"
+      timeframe: "1-3 months",
+      thesis: "Brief reason — catalyst, breakout level, momentum signal",
+    },
+  ],
+  longTerm: [
+    {
+      symbol: "SYMBOL",
+      exchange: "NSE/BSE",
+      sector: "Sector",
+      ltp: 123.45,
+      analystTarget: 200.00,
+      upside: "62%",
+      conviction: "high",
+      timeframe: "1+ year",
+      thesis: "Brief reason — valuation, growth runway, sector tailwind",
+    },
+  ],
+};
+```
+
+- Max 3 per category, prioritize quality and conviction
+- Short-term: momentum, breakouts, event-driven catalysts
+- Long-term: undervalued quality, compounders, secular growth themes
+
+## Portfolio Health Score
+
+27. After completing all the above steps, compute a Portfolio Health Score (0-100) by analyzing:
+    - **Diversification** (0-100): number of stocks, concentration in top holdings
+    - **Sector Concentration** (0-100): sector weights vs ideal 20-25% max per sector
+    - **Analyst Alignment** (0-100): what % of holdings have Buy/Strong Buy consensus
+    - **Risk Factors** (0-100): small-cap exposure, drawdowns from cost, volatility
+28. Compute the overall score as a weighted average (equal weights) of the 4 factors
+29. Write to `src/data/portfolioHealth.js` in this format (or set `portfolioHealth = null` if data is insufficient):
+
+```js
+// Generated on {ISO timestamp}
+export const portfolioHealth = {
+  date: "{YYYY-MM-DD}",
+  score: 72,
+  breakdown: [
+    { factor: "Diversification", score: 75, comment: "Brief explanation of score" },
+    { factor: "Sector Concentration", score: 65, comment: "Brief explanation of score" },
+    { factor: "Analyst Alignment", score: 78, comment: "Brief explanation of score" },
+    { factor: "Risk Factors", score: 70, comment: "Brief explanation of score" },
+  ],
+  summary: "One-line actionable summary of portfolio health and top improvement suggestion.",
+};
+```
+
+- Be honest and critical — don't inflate scores
+- Comments should be specific to the user's actual portfolio (mention stock names, sectors, percentages)
+- Summary should give one clear, actionable improvement suggestion
